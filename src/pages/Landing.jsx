@@ -9,7 +9,7 @@ export default function Landing() {
       <header className="glass-panel" style={{ padding: '1rem 0', borderRadius: '0', position: 'sticky', top: 0, zIndex: 100 }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img src="/logo.png" alt="Clean Up Logo" style={{ height: '56px', objectFit: 'contain' }} onError={(e) => {
+            <img src="/logo.png" alt="Clean Up Logo" style={{ height: '90px', objectFit: 'contain', clipPath: 'inset(2px)', transform: 'scale(1.1)', mixBlendMode: 'multiply' }} onError={(e) => {
               // Fallback au cas où l'image n'est pas encore dans le dossier public
               e.target.style.display = 'none';
               e.target.nextSibling.style.display = 'block';
@@ -29,7 +29,14 @@ export default function Landing() {
 
       <main style={{ flex: 1 }}>
         {/* Hero Section */}
-        <section style={{ padding: '6rem 0', textAlign: 'center', background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%)' }}>
+        <section style={{ 
+          padding: '8rem 0', 
+          textAlign: 'center', 
+          backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("/hero-bg.png")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}>
           <div className="container animate-fade-in">
             <h1 style={{ fontSize: '3.5rem', marginBottom: '1.5rem', color: 'var(--text-main)', lineHeight: '1.2' }}>
               Pour un Congo plus <span style={{ color: 'var(--secondary)' }}>propre</span> et plus <span style={{ color: 'var(--primary)' }}>sain</span>
@@ -91,17 +98,14 @@ export default function Landing() {
                 </div>
               </div>
               
-              <div style={{ position: 'relative' }}>
+              <div>
                 <img 
-                  src="/city.png" 
-                  alt="Ville propre et verte" 
+                  src="/about-bin.png" 
+                  alt="Recyclage et gestion des déchets" 
                   style={{ width: '100%', borderRadius: 'var(--radius-lg)', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }} 
                 />
-                <div className="glass-panel" style={{ position: 'absolute', bottom: '-20px', left: '-20px', padding: '1.5rem', maxWidth: '250px' }}>
-                  <h4 style={{ color: 'var(--secondary)', marginBottom: '0.5rem' }}>Notre Objectif</h4>
-                  <p style={{ fontSize: '0.875rem', fontWeight: '500' }}>Un environnement sans déchet pour la santé de tous.</p>
-                </div>
               </div>
+
             </div>
           </div>
         </section>
@@ -125,8 +129,8 @@ export default function Landing() {
               
               <div style={{ order: 1 }}>
                 <img 
-                  src="/team.png" 
-                  alt="Équipe CLEAN UP" 
+                  src="/specialty.png" 
+                  alt="Équipe CLEAN UP en action" 
                   style={{ width: '100%', borderRadius: 'var(--radius-lg)', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }} 
                 />
               </div>
@@ -189,7 +193,7 @@ export default function Landing() {
       <footer style={{ backgroundColor: '#0f172a', color: 'white', padding: '3rem 0', textAlign: 'center' }}>
         <div className="container">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
-            <img src="/logo.png" alt="Clean Up Logo" style={{ height: '48px', objectFit: 'contain', backgroundColor: 'white', padding: '0.5rem', borderRadius: 'var(--radius-sm)' }} onError={(e) => {
+            <img src="/logo.png" alt="Clean Up Logo" style={{ height: '80px', objectFit: 'contain', backgroundColor: 'transparent', padding: '0.25rem', borderRadius: 'var(--radius-sm)', clipPath: 'inset(2px)', mixBlendMode: 'multiply' }} onError={(e) => {
               e.target.style.display = 'none';
               e.target.nextSibling.style.display = 'block';
             }} />

@@ -17,7 +17,7 @@ export default function Layout() {
       <header className="glass-panel" style={{ padding: '1rem 0', borderRadius: '0', borderBottom: '1px solid var(--glass-border)' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-            <img src="/logo.png" alt="Clean Up Logo" style={{ height: '48px', objectFit: 'contain' }} onError={(e) => {
+            <img src="/logo.png" alt="Clean Up Logo" style={{ height: '70px', objectFit: 'contain', clipPath: 'inset(2px)', mixBlendMode: 'multiply' }} onError={(e) => {
               e.target.style.display = 'none';
               e.target.nextSibling.style.display = 'block';
             }} />

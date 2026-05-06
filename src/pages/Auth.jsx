@@ -69,7 +69,7 @@ export default function Auth() {
     <div className="container" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 0' }}>
       <div className="glass-panel animate-fade-in" style={{ padding: '2.5rem', width: '100%', maxWidth: '500px' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <img src="/logo.png" alt="Clean Up Logo" style={{ height: '64px', objectFit: 'contain', marginBottom: '1rem' }} onError={(e) => e.target.style.display='none'} />
+          <img src="/logo.png" alt="Clean Up Logo" style={{ height: '120px', objectFit: 'contain', marginBottom: '1.5rem', clipPath: 'inset(2px)', mixBlendMode: 'multiply' }} onError={(e) => e.target.style.display='none'} />
           <h2>{isLogin ? 'Connexion' : 'Créer un compte Client'}</h2>
           <p style={{ color: 'var(--text-muted)' }}>Accédez à votre espace Assainissement</p>
         </div>
