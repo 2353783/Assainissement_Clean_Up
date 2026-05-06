@@ -1,6 +1,7 @@
 // Local Storage Database Simulation
 const USERS_KEY = 'cleanup_users';
 const CURRENT_USER_KEY = 'cleanup_current_user';
+const TASKS_KEY = 'cleanup_tasks';
 
 const getStoredUsers = () => {
   const users = localStorage.getItem(USERS_KEY);
@@ -10,6 +11,27 @@ const getStoredUsers = () => {
 const saveStoredUsers = (users) => {
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
 };
+
+// Seed initial admin if requested
+const seedAdmin = () => {
+  const users = getStoredUsers();
+  const targetPhone = '0822326011';
+  if (!users.find(u => u.phone === targetPhone)) {
+    users.push({
+      uid: 'admin_isa_' + Math.random().toString(36).substr(2, 5),
+      name: 'Admin ISA',
+      phone: targetPhone,
+      password: '2353',
+      role: 'admin',
+      createdAt: new Date().toISOString()
+    });
+    saveStoredUsers(users);
+  }
+};
+
+if (typeof window !== 'undefined') {
+  seedAdmin();
+}
 
 export const storage = {
   // Authentication
@@ -103,14 +125,24 @@ export const storage = {
     return users.filter(u => u.role === 'agent');
   },
 
+  getAdmins: async () => {
+    const users = getStoredUsers();
+    return users.filter(u => u.role === 'admin');
+  },
+
+  getClients: async () => {
+    const users = getStoredUsers();
+    return users.filter(u => u.role === 'client');
+  },
+
   createAdmin: async (name, phone, password) => {
     const users = getStoredUsers();
     if (users.find(u => u.phone === phone)) {
-      throw { code: 'auth/email-already-in-use', message: 'Le compte Admin existe déjà !' };
+      throw { code: 'auth/email-already-in-use', message: 'Ce compte existe déjà !' };
     }
 
     const newAdmin = {
-      uid: 'admin_id',
+      uid: Math.random().toString(36).substr(2, 9),
       name,
       phone,
       password,
@@ -139,5 +171,43 @@ export const storage = {
       return users[index];
     }
     throw new Error("Utilisateur introuvable");
+  },
+
+  // Task Management (Planning)
+  createTask: async (agentId, clientId, zone, date) => {
+    const tasks = storage.getTasksSync();
+    const newTask = {
+      id: Math.random().toString(36).substr(2, 9),
+      agentId,
+      clientId,
+      zone,
+      date,
+      status: 'pending', // pending, completed
+      createdAt: new Date().toISOString()
+    };
+    tasks.push(newTask);
+    localStorage.setItem(TASKS_KEY, JSON.stringify(tasks));
+    return newTask;
+  },
+
+  getTasksSync: () => {
+    const tasks = localStorage.getItem(TASKS_KEY);
+    return tasks ? JSON.parse(tasks) : [];
+  },
+
+  getTasks: async () => {
+    return storage.getTasksSync();
+  },
+
+  updateTaskStatus: async (taskId, status) => {
+    const tasks = storage.getTasksSync();
+    const index = tasks.findIndex(t => t.id === taskId);
+    if (index !== -1) {
+      tasks[index].status = status;
+      tasks[index].completedAt = status === 'completed' ? new Date().toISOString() : null;
+      localStorage.setItem(TASKS_KEY, JSON.stringify(tasks));
+      return tasks[index];
+    }
+    throw new Error("Tâche introuvable");
   }
 };

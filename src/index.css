@@ -171,11 +171,73 @@ a:hover {
   animation: fadeIn var(--transition-normal) forwards;
 }
 
-/* Responsive Maps */
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.5rem; }
+  .container { padding: 0 var(--spacing-sm); }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .hide-mobile {
+    display: none !important;
+  }
+
+  .show-mobile-flex {
+    display: flex !important;
+  }
+}
+
+/* PWA Splash/Safe areas */
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Responsive Table */
+@media (max-width: 600px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  tr { border: 1px solid var(--glass-border); margin-bottom: 0.5rem; border-radius: 8px; padding: 0.5rem; }
+  td {
+    border: none;
+    position: relative;
+    padding-left: 50% !important;
+    text-align: right !important;
+    min-height: 30px;
+  }
+  td:before {
+    position: absolute;
+    left: 10px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    color: var(--text-muted);
+  }
+  /* Specific Labels for tables in Dashboards */
+  .staff-table td:nth-of-type(1):before { content: "Nom"; }
+  .staff-table td:nth-of-type(2):before { content: "Tél"; }
+  .staff-table td:nth-of-type(3):before { content: "Rôle"; }
+  
+  .task-table td:nth-of-type(1):before { content: "Agent"; }
+  .task-table td:nth-of-type(2):before { content: "Client"; }
+  .task-table td:nth-of-type(3):before { content: "Date"; }
+  .task-table td:nth-of-type(4):before { content: "Statut"; }
+}
+
 .map-container {
   height: 300px;
   width: 100%;
   border-radius: var(--radius-md);
   overflow: hidden;
-  z-index: 1; /* Keep map below modals */
+  z-index: 1;
 }

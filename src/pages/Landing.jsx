@@ -193,7 +193,7 @@ export default function Landing() {
       <footer style={{ backgroundColor: '#0f172a', color: 'white', padding: '3rem 0', textAlign: 'center' }}>
         <div className="container">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
-            <img src="/logo.png" alt="Clean Up Logo" style={{ height: '80px', objectFit: 'contain', backgroundColor: 'transparent', padding: '0.25rem', borderRadius: 'var(--radius-sm)', clipPath: 'inset(2px)', mixBlendMode: 'multiply' }} onError={(e) => {
+            <img src="/logo.png" alt="Clean Up Logo" style={{ height: '80px', objectFit: 'contain', backgroundColor: 'white', padding: '0.5rem', borderRadius: 'var(--radius-sm)', clipPath: 'inset(2px)' }} onError={(e) => {
               e.target.style.display = 'none';
               e.target.nextSibling.style.display = 'block';
             }} />

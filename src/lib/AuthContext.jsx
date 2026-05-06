@@ -73,6 +73,25 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const getAdmins = async () => {
+    try {
+      return await storage.getAdmins();
+    } catch (error) {
+      console.error("Get admins error:", error);
+      return [];
+    }
+  };
+
+  const createAdminAccount = async (name, phone, password) => {
+    try {
+      await storage.createAdmin(name, phone, password);
+      return { success: true };
+    } catch (error) {
+      console.error("Create admin error:", error);
+      return { success: false, error: error.message || "Erreur lors de la création de l'admin" };
+    }
+  };
+
   const updateUser = async (data) => {
     if (!user) return;
     try {
@@ -85,12 +104,57 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const createTask = async (agentId, clientId, zone, date) => {
+    try {
+      await storage.createTask(agentId, clientId, zone, date);
+      return { success: true };
+    } catch (error) {
+      console.error("Create task error:", error);
+      return { success: false, error: error.message };
+    }
+  };
+
+  const getTasks = async () => {
+    try {
+      return await storage.getTasks();
+    } catch (error) {
+      console.error("Get tasks error:", error);
+      return [];
+    }
+  };
+
+  const updateTaskStatus = async (taskId, status) => {
+    try {
+      await storage.updateTaskStatus(taskId, status);
+      return { success: true };
+    } catch (error) {
+      console.error("Update task status error:", error);
+      return { success: false, error: error.message };
+    }
+  };
+
+  const getClients = async () => {
+    try {
+      return await storage.getClients();
+    } catch (error) {
+      console.error("Get clients error:", error);
+      return [];
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, signup, logout, createAgent, getAgents, updateUser }}>
+    <AuthContext.Provider value={{ 
+      user, loading, login, signup, logout, 
+      createAgent, getAgents, getAdmins, createAdminAccount, 
+      updateUser, createTask, getTasks, updateTaskStatus, getClients 
+    }}>
       {!loading && children}
     </AuthContext.Provider>
   );
 }
+
+
+
 
 
 export const useAuth = () => useContext(AuthContext);
